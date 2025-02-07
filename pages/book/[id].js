@@ -179,7 +179,7 @@ export default function BookPage({ bookData }) {
                       <div>Add title to My Library</div>
                     </div>
                     <div className="text-[18px] mb-[16px] text-[#032b42] font-semibold">
-                      What's it about?
+                      What&apos;s it about?
                     </div>
                     <div className="flex flex-wrap gap-[16px] mb-[16px]">
                       <div className="bg-[#f1f6f4] text-[14px] lg:text-[16px] px-[16px] h-[48px] flex items-center cursor-not-allowed text-[#032b41] font-semibold rounded-[4px]">

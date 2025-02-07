@@ -65,7 +65,7 @@ export default function SignUpModal() {
         onClick={() => dispatch(openSignUpModal())}
         className="flex items-center justify-center w-full bg-[#f1f6f4] h-[40px] text-[#116be9] text-[14px] font-light cursor-pointer"
       >
-        Don't have an account?
+        Don&apos;t have an account?
       </div>
       <Modal
         className="flex justify-center items-center outline-none"
