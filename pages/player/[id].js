@@ -132,7 +132,7 @@ export default function BookPlayer({ bookData }) {
                 ) : (
                   <>
                     <div className="max-w-[460px] flex flex-col items-center mx-auto">
-                      <Image src={"/assets/login.png"} alt="login" width={460} height={460} />
+                      <Image src={"/assets/login.png"} alt="login" width={460} height={460} priority />
                       <div className="text-[24px] text-[#032b41] font-bold mb-[16px] text-center">
                         Log in to your account to read and listen to the book
                       </div>
@@ -168,6 +168,7 @@ export default function BookPlayer({ bookData }) {
                           alt="book image"
                           width={48}
                           height={48}
+                          priority
                         />
                       </figure>
                     </figure>

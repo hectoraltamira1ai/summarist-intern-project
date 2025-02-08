@@ -59,7 +59,7 @@ export default function Sidebar() {
       <div className="bg-[#f7faf9] w-[200px] h-screen fixed hidden md:inline sidebar">
         <div className="flex justify-center">
           <figure className="max-w-[160px] flex justify-center items-center mt-[20px]">
-            <Image className="" src={"/assets/logo.png"} alt="logo" height={36} width={160} />
+            <Image className="" src={"/assets/logo.png"} alt="logo" height={36} width={160} priority />
           </figure>
         </div>
         <div className="flex flex-col justify-between pb-[20px] flex-1">

@@ -9,7 +9,7 @@ export default function Nav() {
         <nav className="nav">
       <div className="nav__wrapper">
         <figure className="nav__img--mask">
-          <Image className="nav__img" src="/assets/logo.png" alt="logo" width={200} height={46} />
+          <Image className="nav__img" src="/assets/logo.png" alt="logo" width={200} height={46} priority />
         </figure>
         <ul className="nav__list--wrapper">
           <li 

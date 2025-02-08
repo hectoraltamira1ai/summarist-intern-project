@@ -32,7 +32,7 @@ export default function Landing() {
               <SignInModal />
             </div>
             <figure className="landing__image--mask">
-              <Image src="/assets/landing.png" alt="login logo" width={400} height={380} />
+              <Image src={"/assets/landing.png"} alt="login logo" width={400} height={380} priority />
             </figure>
           </div>
         </div>
