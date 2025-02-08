@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { openSignInModal } from "@/redux/modalReducer";
 import SignInModal from "@/components/modals/SignInModal";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Settings() {
   const user = useSelector((state) => state.user);
@@ -69,7 +70,7 @@ export default function Settings() {
               ) : (
                 <>
                   <div className="max-w-[460px] flex flex-col items-center mx-auto">
-                    <img src={"/assets/login.png"} alt="login logo" />
+                    <Image src="/assets/login.png" alt="login logo" width={460} height={320} />
                     <div className="text-[24px] text-[#032b41] font-bold mb-[16px] text-center">
                       Log in to your account to see your details.
                     </div>

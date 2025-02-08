@@ -2,6 +2,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
+import Image from "next/image";
 
 export default function Recommended({ checkUserStatus }) {
   const [recommendedBooks, setRecommendedBooks] = useState([]);
@@ -84,7 +85,7 @@ export default function Recommended({ checkUserStatus }) {
                         </div>
                       )}
                       <figure className="w-[172px] h-[172px]">
-                        <img className="w-full h-full" src={book.imageLink} />
+                      <Image className="w-full h-full" src={book.imageLink} alt="book" width={172} height={172} />
                       </figure>
                       <div className="text-[16px] font-bold text-[#032b41] mb-[8px]">
                         {book.title}

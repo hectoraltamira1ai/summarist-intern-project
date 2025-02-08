@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { openSignInModal } from "@/redux/modalReducer";
 import SignInModal from "./modals/SignInModal";
+import Image from "next/image"; 
 
 export default function Landing() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function Landing() {
               <SignInModal />
             </div>
             <figure className="landing__image--mask">
-              <img src={"/assets/landing.png"} alt="landing" />
+              <Image src="/assets/landing.png" alt="login logo" width={400} height={380} />
             </figure>
           </div>
         </div>

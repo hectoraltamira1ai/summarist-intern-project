@@ -7,7 +7,7 @@ import SignInModal from "@/components/modals/SignInModal";
 import CircularProgress from "@mui/material/CircularProgress";
 import Sidebar from "../../components/SideBar";
 import axios from "axios";
-import Image from "next/image"; // Add this import
+import Image from "next/image";
 
 export async function getServerSideProps(context) {
   const bookRes = await axios.get(
@@ -43,11 +43,11 @@ export default function BookPlayer({ bookData }) {
     }
   }, [duration]);
 
-  const onLoadedMetadata = () => {
-    const seconds = audioRef.current.duration; 
+  const onLoadedMetadata = useCallback(() => {
+    const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;
-  };
+  }, []);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
@@ -94,19 +94,17 @@ export default function BookPlayer({ bookData }) {
   }, [isPlaying, repeat]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata);
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.addEventListener("loadedmetadata", onLoadedMetadata);
     }
-
+  
     return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener(
-          "loadedmetadata",
-          onLoadedMetadata
-        );
+      if (audioElement) {
+        audioElement.removeEventListener("loadedmetadata", onLoadedMetadata);
       }
     };
-  }, []);
+  }, [onLoadedMetadata]);
 
   return (
     <div className="w-full">

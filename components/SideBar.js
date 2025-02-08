@@ -20,6 +20,7 @@ import SignInModal from "@/components/modals/SignInModal";
 import { setUser } from "@/redux/userReducer";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -58,7 +59,7 @@ export default function Sidebar() {
       <div className="bg-[#f7faf9] w-[200px] h-screen fixed hidden md:inline sidebar">
         <div className="flex justify-center">
           <figure className="max-w-[160px] flex justify-center items-center mt-[20px]">
-            <img className="" src={"/assets/logo.png"} alt="" />
+            <Image className="" src={"/assets/logo.png"} alt="logo" height={36} width={160} />
           </figure>
         </div>
         <div className="flex flex-col justify-between pb-[20px] flex-1">

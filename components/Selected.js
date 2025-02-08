@@ -2,6 +2,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { TbPlayerPlayFilled } from "react-icons/tb";
+import Image from "next/image"; 
 
 export default function SelectedBook() {
   const [selectedBook, setSelectedBook] = useState("");
@@ -41,7 +42,7 @@ export default function SelectedBook() {
               <div className="hidden md:inline-block w-[1px] bg-[#bac8ce]"></div>
               <div className="w-full flex gap-[16px] md:w-[60%]">
                 <figure className="h-[140px] w-[140px] min-w-[140px]">
-                  <img className="book__image" src={selectedBook.imageLink} />
+                  <Image className="book__image" src={selectedBook.imageLink} alt="selectedbook" height={140} width={140} />
                 </figure>
                 <div className="align-center" style={{ width: "100%" }}>
                   <div className="text-[16px] font-semibold text-[#032b41] mb-[8px]">

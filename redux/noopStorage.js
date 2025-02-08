@@ -1,7 +1,7 @@
 const noopStorage = {
-    getItem: () => null,
-    setItem: () => {},
-    removeItem: () => {},
-  };
-  
-  export default noopStorage;
+  getItem: () => null,
+  setItem: () => {},
+  removeItem: () => {},
+};
+
+export default noopStorage;

@@ -22,9 +22,12 @@ const userSlice = createSlice({
     setSubscriptionStatus: (state, action) => {
       state.subscriptionStatus = action.payload;
     },
+    updateSubscriptionStatus: (state, action) => {
+      state.subscriptionStatus = action.payload;
+    },
   },
 });
 
-export const { setUser, signOutUser, setSubscriptionStatus } = userSlice.actions;
+export const { setUser, signOutUser, setSubscriptionStatus, updateSubscriptionStatus } = userSlice.actions;
 
 export default userSlice.reducer;

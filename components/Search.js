@@ -1,20 +1,20 @@
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
-import { useRef } from "react";
-import { AiOutlineSearch} from "react-icons/ai";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import { FiClock } from "react-icons/fi";
 import MobileSide from "./MobileSide";
 import axios from "axios";
+import Image from "next/image";
 
 export default function SearchBar() {
   const searchRef = useRef(null);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-
-
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef();
   const searchEndpoint = (query) =>
     `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${query}`;
-  
+
   const onChange = useCallback((event) => {
     const query = event.target.value;
     setQuery(query);
@@ -34,11 +34,6 @@ export default function SearchBar() {
     }
   }, []);
 
-  const onFocus = useCallback(() => {
-    setActive(true);
-    window.addEventListener("click", onclick);
-  });
-
   const onClick = useCallback((event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
       setActive(false);
@@ -46,10 +41,13 @@ export default function SearchBar() {
       setResults([]);
       window.removeEventListener("click", onClick);
     }
-  });
+  }, []);
 
-  const audioRef = useRef();
-  const [duration, setDuration] = useState(0);
+  const onFocus = useCallback(() => {
+    setActive(true);
+    window.addEventListener("click", onClick);
+  }, [onClick]);
+
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
@@ -61,28 +59,26 @@ export default function SearchBar() {
     return "00:00";
   };
 
-  const onLoadedMetadata = () => {
+  const onLoadedMetadata = useCallback(() => {
     setDuration(audioRef.current.duration);
-  };
+  }, []);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata);
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.addEventListener("loadedmetadata", onLoadedMetadata);
     }
+  
     return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener(
-          "loadedmetadata",
-          onLoadedMetadata
-        );
+      if (audioElement) {
+        audioElement.removeEventListener("loadedmetadata", onLoadedMetadata);
       }
     };
-  }, []);
+  }, [onLoadedMetadata]);
 
   useEffect(() => {
     setDuration(audioRef.current?.duration);
   }, []);
-
 
   return (
     <>
@@ -113,30 +109,30 @@ export default function SearchBar() {
                     <>
                       {results.map((book, index) => (
                         <div key={index}>
-                        <Link
-                          key={index}
-                          href={`book/${book.id}`}
-                          className="flex items-center p-[16px] gap-[24px] h-[120px] hover:bg-[#f1f6f4]"
-                        >
-                          <figure className="w-[80px] h-[80px] min-w-[80px]">
-                            <img src={book.imageLink} alt="book image" />
-                          </figure>
-                          <div>
-                            <div className="text-[16px] font-semibold text-[#032b41] mb-[8px]">
-                              {book.title}
-                            </div>
-                            <div className="text-[14px] font-light text-[#6b757b] mb-[8px]">
-                              {book.author}
-                            </div>
-                            <div className="flex items-center gap-[4px]">
-                              <FiClock className="w-[16px] h-[16px] text-[#6b757b]" />
-                              <audio src={book.audioLink} ref={audioRef} />
-                              <div className="text-[14px] text-[#6b757b] font-light ">
-                                {formatTime(duration)}
+                          <Link
+                            key={index}
+                            href={`book/${book.id}`}
+                            className="flex items-center p-[16px] gap-[24px] h-[120px] hover:bg-[#f1f6f4]"
+                          >
+                            <figure className="w-[80px] h-[80px] min-w-[80px]">
+                              <Image className="w-full h-full" src={book.imageLink} alt="book" width={80} height={80} />
+                            </figure>
+                            <div>
+                              <div className="text-[16px] font-semibold text-[#032b41] mb-[8px]">
+                                {book.title}
+                              </div>
+                              <div className="text-[14px] font-light text-[#6b757b] mb-[8px]">
+                                {book.author}
+                              </div>
+                              <div className="flex items-center gap-[4px]">
+                                <FiClock className="w-[16px] h-[16px] text-[#6b757b]" />
+                                <audio src={book.audioLink} ref={audioRef} />
+                                <div className="text-[14px] text-[#6b757b] font-light ">
+                                  {formatTime(duration)}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Link>
+                          </Link>
                         </div>
                       ))}
                     </>
@@ -154,7 +150,6 @@ export default function SearchBar() {
             ) : (
               <></>
             )}
-            
             <MobileSide />
           </div>
         </div>

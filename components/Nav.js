@@ -1,5 +1,6 @@
 import { openSignInModal } from "@/redux/modalReducer";
 import { useDispatch } from "react-redux";
+import Image from "next/image"; 
 
 export default function Nav() {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ export default function Nav() {
         <nav className="nav">
       <div className="nav__wrapper">
         <figure className="nav__img--mask">
-          <img className="nav__img" src={"/assets/logo.png"} alt="logo" />
+          <Image className="nav__img" src="/assets/logo.png" alt="logo" width={200} height={46} />
         </figure>
         <ul className="nav__list--wrapper">
           <li 
