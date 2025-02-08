@@ -5,7 +5,7 @@ import { SlArrowDown } from "react-icons/sl";
 import { useState } from "react";
 import { getCheckoutUrl } from "../stripePayment";
 import { useRouter } from "next/navigation";
-import { app } from "@/firebase";
+import app from '@/firebase';
 import { useDispatch } from 'react-redux';
 import { setSubscriptionMonthly, setSubscriptionYearly } from '../redux/subscriptionReducer';
 import { setSubscriptionStatus } from '../redux/userReducer';

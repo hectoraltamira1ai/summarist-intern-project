@@ -11,6 +11,7 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [duration, setDuration] = useState(0);
+  const [active, setActive] = useState(false);
   const audioRef = useRef();
   const searchEndpoint = (query) =>
     `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${query}`;
