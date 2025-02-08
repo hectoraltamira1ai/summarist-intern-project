@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
@@ -84,7 +85,13 @@ export default function SuggestedBooks({ checkUserStatus }) {
                         </div>
                       )}
                       <figure className="w-[172px] h-[172px]">
-                        <img className="w-full h-full" src={book.imageLink} />
+                        <Image
+                          className="w-full h-full"
+                          src={book.imageLink}
+                          alt={book.title}
+                          width={172}
+                          height={172}
+                        />
                       </figure>
                       <div className="text-[16px] font-bold text-[#032b41] mb-[8px]">
                         {book.title}

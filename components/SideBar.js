@@ -4,7 +4,7 @@ import {
   AiOutlineQuestionCircle,
 } from "react-icons/ai";
 import { usePathname } from "next/navigation";
-import { IoBookmarkOutline, IoText } from "react-icons/io5";
+import { IoBookmarkOutline } from "react-icons/io5";
 import { RiBallPenLine } from "react-icons/ri";
 import { SlSettings } from "react-icons/sl";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
@@ -39,7 +39,7 @@ export default function Sidebar() {
     });
 
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   async function handleSignOut() {
     await signOut(auth);

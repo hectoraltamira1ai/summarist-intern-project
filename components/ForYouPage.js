@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Selected from "../components/Selected";
 import Recommended from "../components/Recommended";
 import Suggested from "../components/Suggested";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase";
 import usePremiumStatus from "@/stripe/usePremiumStatus";
 import { onAuthStateChanged } from "firebase/auth";
@@ -11,8 +10,7 @@ export default function ForYouPage() {
   const audioRef = useRef(null);
   const audioDuration = useRef(0);
   const [user, setUser] = useState("");
-  const [isUser, userLoading] = useAuthState(auth);
-  const userIsPremium = usePremiumStatus(isUser);
+
   const checkUserStatus = usePremiumStatus(user);
 
   useEffect(() => {

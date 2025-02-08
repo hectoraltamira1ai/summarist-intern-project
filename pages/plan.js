@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { setSubscriptionMonthly, setSubscriptionYearly } from '../redux/subscriptionReducer';
 import { setSubscriptionStatus } from '../redux/userReducer';
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 export default function ChoosePlan() {
   const [accordionOneClicked, setAccordionOneClicked] = useState(false);
@@ -74,7 +75,7 @@ export default function ChoosePlan() {
                 Turn ordinary moments into amazing learning opportunities
               </div>
               <figure className="flex justify-center max-w-[340px] mx-auto rounded-t-[180px] overflow-hidden">
-                <img src={"/assets/pricing-top.png"} alt="" />
+              <Image src="/assets/pricing-top.png" alt="pricing" width={340} height={340} />
               </figure>
             </div>
           </div>

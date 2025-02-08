@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { openSignInModal } from "@/redux/modalReducer";
 import SignInModal from "@/components/modals/SignInModal";
-import { signOutUser } from "@/redux/userReducer";
-import { signOut } from "firebase/auth";
-import { auth } from "@/firebase";
 import { useRouter } from "next/router";
 
 export default function Settings() {

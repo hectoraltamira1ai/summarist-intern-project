@@ -20,9 +20,10 @@ export default function SignInModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState("");
+  const [setValue] = useState("");
   const [error, setError] = useState("");
   const [guestAuth, setGuestAuth] = useState(false);
+   
 
   async function handleSignIn() {
     setLoading(true);
@@ -70,7 +71,7 @@ export default function SignInModal() {
       );
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch, router, setValue]);
 
   return (
     <>

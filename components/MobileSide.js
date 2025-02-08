@@ -38,7 +38,7 @@ export default function MobileSide() {
       );
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   async function handleSignOut() {
     await signOut(auth);

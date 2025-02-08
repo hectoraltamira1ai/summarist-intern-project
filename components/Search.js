@@ -9,7 +9,6 @@ import axios from "axios";
 export default function SearchBar() {
   const searchRef = useRef(null);
   const [query, setQuery] = useState("");
-  const [active, setActive] = useState(false);
   const [results, setResults] = useState([]);
 
 

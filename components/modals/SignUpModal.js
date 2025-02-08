@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { openSignInModal, openSignUpModal } from "@/redux/modalReducer";
-import { createUserWithEmailAndPassword, onAuthStateChanged, } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { setUser } from "@/redux/userReducer";
 import { Ring } from "@uiball/loaders";
@@ -18,14 +18,14 @@ export default function SignUpModal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const handleCloseModal = () => {
+    dispatch(openSignUpModal());
+  };
+
   async function handleSignUp() {
     setLoading(true);
     try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      await createUserWithEmailAndPassword(auth, email, password);
       const user = {
         email: email,
       };
@@ -40,13 +40,6 @@ export default function SignUpModal() {
     }
   }
 
-  function handleCloseModal() {
-    setError("");
-    dispatch(openSignUpModal());
-    setEmail("");
-    setPassword("");
-  }
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) return;
@@ -57,7 +50,7 @@ export default function SignUpModal() {
       );
     });
     return unsubscribe;
-  });
+  }, [dispatch]);
 
   return (
     <>

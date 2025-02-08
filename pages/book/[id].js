@@ -1,6 +1,6 @@
 import Search from "@/components/Search";
 import Sidebar from "@/components/SideBar";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { AiOutlineStar } from "react-icons/ai";
 import { BiMicrophone } from "react-icons/bi";
@@ -8,10 +8,10 @@ import { BsBook, BsBookmark } from "react-icons/bs";
 import { FiClock } from "react-icons/fi";
 import { HiOutlineLightBulb, HiOutlineMicrophone } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
-import { auth } from "@/firebase";
 import SignInModal from "@/components/modals/SignInModal";
 import usePremiumStatus from "@/stripe/usePremiumStatus";
 import axios from "axios";
+import Image from "next/image"; // Add this import
 
 export async function getServerSideProps(context) {
   const bookRes = await axios.get(
@@ -42,25 +42,23 @@ export default function BookPage({ bookData }) {
     }
   }
 
-  const onLoadedMetadata = () => {
+  const onLoadedMetadata = useCallback(() => {
     if (!loading) {
       setDuration(audioRef.current?.duration);
     }
-  };
+  }, [loading]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener("loadedmetadata", onLoadedMetadata);
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.addEventListener("loadedmetadata", onLoadedMetadata);
     }
     return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener(
-          "loadedmetadata",
-          onLoadedMetadata
-        );
+      if (audioElement) {
+        audioElement.removeEventListener("loadedmetadata", onLoadedMetadata);
       }
     };
-  }, [])
+  }, [onLoadedMetadata]);
 
   useEffect(() => {
     setDuration(audioRef.current?.duration);
@@ -84,14 +82,6 @@ export default function BookPage({ bookData }) {
     }
     return "00:00";
   };
-
-  async function getCustomClaimRole() {
-    await auth.currentUser?.getIdToken(true);
-    const decodedToken = await auth.currentUser?.getIdTokenResult();
-    return decodedToken?.claims.stripeRole;
-  }
-
-
 
   return (
     <div className="w-full">
@@ -211,7 +201,7 @@ export default function BookPage({ bookData }) {
                 ) : (
                   <>
                     <figure className="h-[300px] w-[300px] min-w-[300px]">
-                      <img src={bookData?.imageLink} alt="" />
+                      <Image src={bookData?.imageLink} alt="bookData" width={300} height={300} /> {/* Use next/image */}
                     </figure>
                   </>
                 )}

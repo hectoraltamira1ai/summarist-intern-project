@@ -3,13 +3,11 @@ import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { GrBackTen, GrForwardTen } from "react-icons/gr";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase";
-import { setUser } from "@/redux/userReducer";
 import SignInModal from "@/components/modals/SignInModal";
 import CircularProgress from "@mui/material/CircularProgress";
 import Sidebar from "../../components/SideBar";
 import axios from "axios";
+import Image from "next/image"; // Add this import
 
 export async function getServerSideProps(context) {
   const bookRes = await axios.get(
@@ -26,10 +24,11 @@ export default function BookPlayer({ bookData }) {
   const audioRef = useRef();
   const progressBarRef = useRef();
   const playAnimationRef = useRef();
+  
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [modalsNeedToOpen, setModalNeedsToOpen] = useState(false);
-  const [loading, setLoading] = useState();
+  const [loading] = useState(false);
 
   const repeat = useCallback(() => {
     if (audioRef.current) {
@@ -45,7 +44,7 @@ export default function BookPlayer({ bookData }) {
   }, [duration]);
 
   const onLoadedMetadata = () => {
-    const seconds = audioRef.current.duration;
+    const seconds = audioRef.current.duration; 
     setDuration(seconds);
     progressBarRef.current.max = seconds;
   };
@@ -135,7 +134,7 @@ export default function BookPlayer({ bookData }) {
                 ) : (
                   <>
                     <div className="max-w-[460px] flex flex-col items-center mx-auto">
-                      <img src={"/assets/login.png"} alt="login" />
+                      <Image src={"/assets/login.png"} alt="login" width={460} height={460} />
                       <div className="text-[24px] text-[#032b41] font-bold mb-[16px] text-center">
                         Log in to your account to read and listen to the book
                       </div>
@@ -165,10 +164,12 @@ export default function BookPlayer({ bookData }) {
                   ) : (
                     <figure className="flex items-center max-w-[48px]">
                       <figure className="h-[48px] w-[48px] min-w-[48px]">
-                        <img
+                        <Image
                           className="w-full h-full"
                           src={bookData.imageLink}
-                          alt=""
+                          alt="book image"
+                          width={48}
+                          height={48}
                         />
                       </figure>
                     </figure>
