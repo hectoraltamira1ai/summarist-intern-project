@@ -63,7 +63,7 @@ export default function MobileSide() {
         <div className={`phone__menu ${isOpen ? "phone__menu--active" : " "}`}>
           <div className="flex justify-center">
             <figure className="max-w-[160px] flex justify-center items-center mt-[20px]">
-              <Image className="" src="/assets/logo.png" alt="logo" width={160} height={36} />
+              <Image className="" src={"/assets/logo.png"} alt="logo" width={160} height={36} />
             </figure>
           </div>
           <div className="mt-[40px]">
